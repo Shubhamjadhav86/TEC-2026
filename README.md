@@ -187,4 +187,4 @@ This project is created for E-Cell MET's TEC event.
 
 ---
 
-**Built with ❤️ for E-Cell MET | TEC 2024**
+**Built with ❤️ for E-Cell MET | TEC 2026**
