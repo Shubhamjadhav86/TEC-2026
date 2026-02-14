@@ -1,15 +1,36 @@
 require('dotenv').config();
+
+process.on('uncaughtException', (err) => {
+    console.error('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+    console.error(err.name, err.message);
+    console.error(err.stack);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (err) => {
+    console.error('UNHANDLED REJECTION! 💥 Shutting down...');
+    console.error(err.name, err.message);
+    console.error(err.stack);
+    process.exit(1);
+});
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const connectDB = require('./config/database');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Connect to MongoDB and start server
 const startServer = async () => {
-    await connectDB();
+    try {
+        console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("MongoDB Connected");
+    } catch (err) {
+        console.error("MongoDB Connection Error:", err);
+        process.exit(1);
+    }
 
     // Middleware
     app.use(require('cookie-parser')());
