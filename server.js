@@ -48,6 +48,7 @@ const startServer = async () => {
 
   // Frontend Routes (Serving HTML files)
   app.get('/', (req, res) => {
+    console.log("INDEX ROUTE HIT");
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
 

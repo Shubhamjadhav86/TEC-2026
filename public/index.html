@@ -160,6 +160,66 @@
             border-bottom: 1px solid var(--white-10);
         }
     </style>
+
+    <style>
+        /* 1. Fix the Overlap & Transparency Issue */
+        .section {
+            /* Forces sections to stack naturally instead of overlapping */
+            position: relative !important;
+            display: block;
+            width: 100%;
+
+            /* CRITICAL: Gives sections a solid background.
+               Without this, your sticky F1 canvas bleeds through the text! */
+            background-color: var(--deep-black, #0a0a0a);
+
+            /* Adds breathing room between sections */
+            padding: 6rem 2rem;
+            z-index: 10;
+        }
+
+        /* Target the alternating sections to keep your dark-gray contrast */
+        .section[style*="var(--dark-gray)"] {
+            background-color: var(--dark-gray, #1a1a1a) !important;
+        }
+
+        /* 2. Fix the Container Width */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        /* 3. Fix the Squished Cards using CSS Grid */
+        .grid {
+            display: grid;
+            gap: 2.5rem; /* This stops the cards from touching each other */
+            align-items: stretch;
+        }
+
+        /* Responsive columns based on your HTML classes */
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+        /* 4. Basic Card Styling (In case it's missing from style.css) */
+        .card, .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* 5. SPA Page View Switching */
+        .page-view {
+            display: none;
+        }
+        .page-view.active {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -172,7 +232,7 @@
             </a>
             <div class="navbar-menu" id="navbarMenu">
                 <a href="/" class="navbar-link active">Home</a>
-                <a href="/about" class="navbar-link">About</a>
+                <a href="#about-tec" class="navbar-link" data-spa="scroll">About</a>
                 <a href="/leaderboard" class="navbar-link">Leaderboard</a>
                 <a href="/login" class="navbar-link">Login</a>
                 <a href="/register" class="navbar-link btn-primary" style="padding: 0.5rem 1.5rem;">Register</a>
@@ -185,10 +245,13 @@
         </div>
     </nav>
 
+    <!-- ===== HOME VIEW (SPA) ===== -->
+    <div id="view-home" class="page-view active">
+
     <!-- Hero Section with Scroll-based Image Sequence -->
-    <section id="hero-section" style="height: 300vh; position: relative;">
+    <section id="hero-section" style="min-height: 300vh; position: relative; z-index: 0;">
         <!-- Canvas for Image Sequence -->
-        <div style="position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden;">
+        <div style="position: sticky; top: 0; height: 100vh; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; z-index: 0;">
             <canvas id="hero-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></canvas>
 
             <!-- Loading Indicator -->
@@ -202,15 +265,16 @@
 
             <!-- Hero Content Stage 1 -->
             <div id="hero-content-1"
-                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; width: 90%; max-width: 800px; transition: all 0.6s ease; opacity: 0;">
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; z-index: 10; width: 90%; max-width: 800px; transition: all 0.6s ease; opacity: 0;">
                 <img src="/assets/teclogo.svg" alt="TEC Logo"
-                    style="height: 120px; margin-bottom: 2rem; filter: drop-shadow(0 0 30px rgba(255, 24, 1, 0.6));">
+                    style="display: block; height: 150px; margin: 0 auto 2rem; animation: heroGlow 2s ease-in-out infinite alternate; filter: drop-shadow(0 0 30px rgba(255, 24, 1, 0.7)) drop-shadow(0 0 60px rgba(255, 24, 1, 0.4)) drop-shadow(0 0 100px rgba(255, 24, 1, 0.2));">
                 <p
-                    style="font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 2vw, 1.5rem); letter-spacing: 0.2em; color: var(--white-80); margin-bottom: 2rem; text-shadow: 0 0 20px rgba(255, 24, 1, 0.3);">
+                    style="font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 2.5vw, 1.6rem); letter-spacing: 0.15em; color: var(--white-80); margin-bottom: 2.5rem; text-shadow: 0 0 10px rgba(255, 24, 1, 0.4), 0 0 30px rgba(255, 24, 1, 0.2); width: 100%; overflow-wrap: break-word;">
                     TAKE AN ENTREPRENEURSHIP CHALLENGE
                 </p>
+
                 <a href="/register" class="btn btn-primary btn-lg"
-                    style="box-shadow: 0 0 30px rgba(255, 24, 1, 0.4);">Start Your Engine</a>
+                    style="box-shadow: 0 0 30px rgba(255, 24, 1, 0.4), 0 0 60px rgba(255, 24, 1, 0.15);">Start Your Engine</a>
             </div>
 
             <!-- Hero Content Stage 2 -->
@@ -271,6 +335,15 @@
                 transform: rotate(360deg);
             }
         }
+
+        @keyframes heroGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(255, 24, 1, 0.5)) drop-shadow(0 0 40px rgba(255, 24, 1, 0.25)) drop-shadow(0 0 60px rgba(255, 24, 1, 0.1));
+            }
+            100% {
+                filter: drop-shadow(0 0 40px rgba(255, 24, 1, 0.9)) drop-shadow(0 0 80px rgba(255, 24, 1, 0.5)) drop-shadow(0 0 120px rgba(255, 24, 1, 0.3));
+            }
+        }
     </style>
 
     <!-- About TEC Section -->
@@ -326,7 +399,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section class="section" style="background: var(--dark-gray);">
+    <section class="section" style="background: var(--dark-gray); position: relative; z-index: 2;">
         <div class="container">
             <h2 class="text-center mb-xl">How It <span class="text-red">Works</span></h2>
             <div class="grid grid-4 gap-lg">
@@ -350,7 +423,7 @@
                     <h4>Submit Reports</h4>
                     <p class="text-muted">Submit your solutions and documentation on time.</p>
                 </div>
-                <div class="text-center fade-in" style="grid-column: span 2;">
+                <div class="text-center fade-in">
                     <div class="step-number">5</div>
                     <h4>Get Ranked</h4>
                     <p class="text-muted">Earn points and climb the leaderboard to win!</p>
@@ -409,7 +482,7 @@
     </section>
 
     <!-- Important Dates Timeline -->
-    <section class="section" style="background: var(--dark-gray);">
+    <section class="section" style="background: var(--dark-gray); position: relative; z-index: 2;">
         <div class="container">
             <h2 class="text-center mb-xl">Important <span class="text-red">Dates</span></h2>
             <div style="max-width: 700px; margin: 0 auto;">
@@ -497,7 +570,7 @@
     </section>
 
     <!-- Call to Action Section -->
-    <section class="cta-section">
+    <section class="section cta-section">
         <div class="container text-center">
             <h2 class="mb-lg">Ready to Take the <span class="text-red">Challenge?</span></h2>
             <p class="text-muted mb-xl" style="font-size: 1.25rem;">Join hundreds of students in this exciting journey
@@ -505,6 +578,8 @@
             <a href="/register" class="btn btn-primary btn-lg">Register Your Team Now</a>
         </div>
     </section>
+
+    </div><!-- /view-home -->
 
     <!-- Footer -->
     <footer class="footer">
