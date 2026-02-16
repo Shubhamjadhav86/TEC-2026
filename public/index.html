@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Russo+One&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -90,7 +90,7 @@
         }
 
         .hero-tagline {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Outfit', sans-serif;
             font-size: clamp(1rem, 2vw, 1.5rem);
             letter-spacing: 0.2em;
             color: var(--white-80);
@@ -150,7 +150,7 @@
             font-size: 3rem;
             font-weight: bold;
             color: var(--f1-red);
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         .cta-section {
@@ -223,6 +223,21 @@
 </head>
 
 <body>
+    <!-- Skip-to-content link for keyboard users -->
+    <a href="#about-tec" class="skip-link">Skip to Main Content</a>
+
+    <!-- Ambient Mesh Gradient Background -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Top Announcement Strip -->
+    <div class="navbar-strip" role="banner" aria-label="Announcement">
+        <span>🏁 Season 2026 — <span class="strip-highlight">Applications Open</span> · Limited Slots Remaining</span>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -235,7 +250,8 @@
                 <a href="#about-tec" class="navbar-link" data-spa="scroll">About</a>
                 <a href="/leaderboard" class="navbar-link">Leaderboard</a>
                 <a href="/login" class="navbar-link">Login</a>
-                <a href="/register" class="navbar-link btn-primary" style="padding: 0.5rem 1.5rem;">Register</a>
+                <span class="navbar-divider"></span>
+                <a href="/register" class="navbar-cta">Register <span class="cta-arrow">→</span></a>
             </div>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
@@ -260,7 +276,7 @@
                 <div
                     style="width: 60px; height: 60px; border: 4px solid rgba(255, 24, 1, 0.2); border-top-color: var(--f1-red); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;">
                 </div>
-                <p style="color: var(--white-80); font-family: 'Orbitron', sans-serif;">Loading TEC Experience...</p>
+                <p style="color: var(--white-80); font-family: 'Outfit', sans-serif;">Loading TEC Experience...</p>
             </div>
 
             <!-- Hero Content Stage 1 -->
@@ -269,7 +285,7 @@
                 <img src="/assets/teclogo.svg" alt="TEC Logo"
                     style="display: block; height: 150px; margin: 0 auto 2rem; animation: heroGlow 2s ease-in-out infinite alternate; filter: drop-shadow(0 0 30px rgba(255, 24, 1, 0.7)) drop-shadow(0 0 60px rgba(255, 24, 1, 0.4)) drop-shadow(0 0 100px rgba(255, 24, 1, 0.2));">
                 <p
-                    style="font-family: 'Orbitron', sans-serif; font-size: clamp(1rem, 2.5vw, 1.6rem); letter-spacing: 0.15em; color: var(--white-80); margin-bottom: 2.5rem; text-shadow: 0 0 10px rgba(255, 24, 1, 0.4), 0 0 30px rgba(255, 24, 1, 0.2); width: 100%; overflow-wrap: break-word;">
+                    style="font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 2.5vw, 1.6rem); letter-spacing: 0.15em; color: var(--white-80); margin-bottom: 2.5rem; text-shadow: 0 0 10px rgba(255, 24, 1, 0.4), 0 0 30px rgba(255, 24, 1, 0.2); width: 100%; overflow-wrap: break-word;">
                     TAKE AN ENTREPRENEURSHIP CHALLENGE
                 </p>
 
@@ -281,7 +297,7 @@
             <div id="hero-content-2"
                 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; width: 90%; max-width: 800px; transition: all 0.6s ease; opacity: 0; pointer-events: none;">
                 <h1
-                    style="font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; text-shadow: 0 0 30px rgba(255, 24, 1, 0.5);">
+                    style="font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; margin-bottom: 1.5rem; text-shadow: 0 0 30px rgba(255, 24, 1, 0.5);">
                     3-Month <span style="color: var(--f1-red);">Innovation</span> Saga
                 </h1>
                 <p style="font-size: clamp(1rem, 2vw, 1.5rem); color: var(--white-80); margin-bottom: 2rem;">
@@ -290,19 +306,19 @@
                 <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
                     <div>
                         <div
-                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Orbitron', sans-serif;">
+                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Outfit', sans-serif;">
                             6</div>
                         <p style="color: var(--white-60);">Phases</p>
                     </div>
                     <div>
                         <div
-                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Orbitron', sans-serif;">
+                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Outfit', sans-serif;">
                             3</div>
                         <p style="color: var(--white-60);">Months</p>
                     </div>
                     <div>
                         <div
-                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Orbitron', sans-serif;">
+                            style="font-size: 3rem; font-weight: bold; color: var(--f1-red); font-family: 'Outfit', sans-serif;">
                             ∞</div>
                         <p style="color: var(--white-60);">Possibilities</p>
                     </div>
@@ -350,8 +366,8 @@
     <section class="section" id="about-tec">
         <div class="container">
             <div class="grid grid-2 gap-lg">
-                <div class="fade-in">
-                    <h2>About <span class="text-red">TEC</span></h2>
+                <div class="reveal">
+                    <h2>About <span class="text-gradient">TEC</span></h2>
                     <p class="text-muted">
                         The Technical Excellence Challenge (TEC) is a premier college-level competition platform
                         designed to foster innovation, entrepreneurship, and technical excellence among students across
@@ -361,37 +377,36 @@
                         This 3-month intensive program challenges teams to transform their innovative ideas into viable
                         solutions through structured phases, mentorship, and real-world problem-solving.
                     </p>
-                    <div style="display: flex; gap: 2rem; margin-top: 2rem;">
-                        <div>
+                    <div class="stat-row" style="justify-content: flex-start;">
+                        <div class="stat-block">
                             <div class="stat-number">6</div>
-                            <p class="text-muted">Phases</p>
+                            <p class="stat-label">Phases</p>
                         </div>
-                        <div>
+                        <div class="stat-block">
                             <div class="stat-number">3</div>
-                            <p class="text-muted">Months</p>
+                            <p class="stat-label">Months</p>
                         </div>
-                        <div>
+                        <div class="stat-block">
                             <div class="stat-number">∞</div>
-                            <p class="text-muted">Possibilities</p>
+                            <p class="stat-label">Possibilities</p>
                         </div>
                     </div>
                 </div>
-                <div class="grid gap-md">
-                    <div class="card fade-in">
+                <div class="events-grid">
+                    <div class="glass-card reveal delay-1">
                         <div class="feature-icon">🎓</div>
                         <h4>Multi-College Participation</h4>
                         <p class="text-muted">Compete with talented teams from colleges across the region.</p>
                     </div>
-                    <div class="card fade-in">
+                    <div class="glass-card reveal delay-2">
                         <div class="feature-icon">📊</div>
                         <h4>Structured Phases</h4>
                         <p class="text-muted">Progress through well-defined rounds with clear objectives and tasks.</p>
                     </div>
-                    <div class="card fade-in">
+                    <div class="glass-card reveal delay-3">
                         <div class="feature-icon">🏆</div>
                         <h4>Transparent Leaderboard</h4>
-                        <p class="text-muted">Track your progress and ranking in real-time throughout the competition.
-                        </p>
+                        <p class="text-muted">Track your progress and ranking in real-time throughout the competition.</p>
                     </div>
                 </div>
             </div>
@@ -401,29 +416,32 @@
     <!-- How It Works Section -->
     <section class="section" style="background: var(--dark-gray); position: relative; z-index: 2;">
         <div class="container">
-            <h2 class="text-center mb-xl">How It <span class="text-red">Works</span></h2>
-            <div class="grid grid-4 gap-lg">
-                <div class="text-center fade-in">
+            <div class="section-header reveal">
+                <span class="section-label">🛠️ Process</span>
+                <h2 class="section-title">How It <span class="text-gradient">Works</span></h2>
+            </div>
+            <div class="events-grid">
+                <div class="glass-card text-center reveal delay-1">
                     <div class="step-number">1</div>
                     <h4>Register Team</h4>
                     <p class="text-muted">Create your team account and complete registration.</p>
                 </div>
-                <div class="text-center fade-in">
+                <div class="glass-card text-center reveal delay-2">
                     <div class="step-number">2</div>
                     <h4>Add Members</h4>
                     <p class="text-muted">Invite your team members (up to 5 members).</p>
                 </div>
-                <div class="text-center fade-in">
+                <div class="glass-card text-center reveal delay-3">
                     <div class="step-number">3</div>
                     <h4>Complete Tasks</h4>
                     <p class="text-muted">Work on assigned tasks for each competition phase.</p>
                 </div>
-                <div class="text-center fade-in">
+                <div class="glass-card text-center reveal delay-4">
                     <div class="step-number">4</div>
                     <h4>Submit Reports</h4>
                     <p class="text-muted">Submit your solutions and documentation on time.</p>
                 </div>
-                <div class="text-center fade-in">
+                <div class="glass-card text-center reveal delay-5">
                     <div class="step-number">5</div>
                     <h4>Get Ranked</h4>
                     <p class="text-muted">Earn points and climb the leaderboard to win!</p>
@@ -435,11 +453,13 @@
     <!-- Competition Phases Section -->
     <section class="section" id="phases">
         <div class="container">
-            <h2 class="text-center mb-xl">Competition <span class="text-red">Phases</span></h2>
-            <div class="grid grid-2 gap-lg">
-                <div class="card fade-in">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+            <div class="section-header reveal">
+                <span class="section-label">🏁 Competition</span>
+                <h2 class="section-title">Competition <span class="text-gradient">Phases</span></h2>
+            </div>
+            <div class="events-grid events-grid--2">
+                <div class="glass-card reveal delay-1">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                         <h3 class="mb-0">Phase 1: Registration</h3>
                         <span class="badge badge-success">Active</span>
                     </div>
@@ -447,9 +467,8 @@
                         information to participate in the challenge.</p>
                     <p class="text-muted mt-md"><strong>Duration:</strong> 2 Weeks</p>
                 </div>
-                <div class="card fade-in">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <div class="glass-card reveal delay-2">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                         <h3 class="mb-0">Phase 2: Task Round 1</h3>
                         <span class="badge badge-warning">Upcoming</span>
                     </div>
@@ -457,9 +476,8 @@
                         identification.</p>
                     <p class="text-muted mt-md"><strong>Duration:</strong> 3 Weeks</p>
                 </div>
-                <div class="card fade-in">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <div class="glass-card reveal delay-3">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                         <h3 class="mb-0">Phase 3: Task Round 2</h3>
                         <span class="badge badge-info">Upcoming</span>
                     </div>
@@ -467,9 +485,8 @@
                         implementation.</p>
                     <p class="text-muted mt-md"><strong>Duration:</strong> 4 Weeks</p>
                 </div>
-                <div class="card fade-in">
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <div class="glass-card reveal delay-4">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                         <h3 class="mb-0">Phase 4: Final Round</h3>
                         <span class="badge badge-info">Upcoming</span>
                     </div>
@@ -530,36 +547,38 @@
     <!-- Why Participate Section -->
     <section class="section" id="benefits">
         <div class="container">
-            <h2 class="text-center mb-xl">Why <span class="text-red">Participate?</span></h2>
-            <div class="grid grid-3 gap-lg">
-                <div class="card text-center fade-in">
+            <div class="section-header reveal">
+                <span class="section-label">✨ Benefits</span>
+                <h2 class="section-title">Why <span class="text-gradient">Participate?</span></h2>
+            </div>
+            <div class="events-grid events-grid--3">
+                <div class="glass-card text-center reveal delay-1">
                     <div class="feature-icon">🤝</div>
                     <h4>Networking</h4>
-                    <p class="text-muted">Connect with like-minded entrepreneurs, mentors, and industry professionals.
-                    </p>
+                    <p class="text-muted">Connect with like-minded entrepreneurs, mentors, and industry professionals.</p>
                 </div>
-                <div class="card text-center fade-in">
+                <div class="glass-card text-center reveal delay-2">
                     <div class="feature-icon">📚</div>
                     <h4>Learning</h4>
                     <p class="text-muted">Gain hands-on experience in entrepreneurship, business development, and
                         innovation.</p>
                 </div>
-                <div class="card text-center fade-in">
+                <div class="glass-card text-center reveal delay-3">
                     <div class="feature-icon">🌟</div>
                     <h4>Recognition</h4>
                     <p class="text-muted">Showcase your talent and get recognized at the college and regional level.</p>
                 </div>
-                <div class="card text-center fade-in">
+                <div class="glass-card text-center reveal delay-1">
                     <div class="feature-icon">💰</div>
                     <h4>Prizes</h4>
                     <p class="text-muted">Win exciting cash prizes, certificates, and incubation opportunities.</p>
                 </div>
-                <div class="card text-center fade-in">
+                <div class="glass-card text-center reveal delay-2">
                     <div class="feature-icon">👨‍🏫</div>
                     <h4>Mentorship</h4>
                     <p class="text-muted">Get guidance from experienced entrepreneurs and industry experts.</p>
                 </div>
-                <div class="card text-center fade-in">
+                <div class="glass-card text-center reveal delay-3">
                     <div class="feature-icon">⚡</div>
                     <h4>Experience</h4>
                     <p class="text-muted">Build your portfolio with real-world project experience and problem-solving
@@ -569,13 +588,48 @@
         </div>
     </section>
 
+    <!-- Sponsor / Team Marquee -->
+    <section class="marquee-section" aria-label="Our Sponsors and Partners">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Partners</span>
+                <h2 class="section-title">Backed By <span class="text-gradient">The Best</span></h2>
+            </div>
+        </div>
+        <div class="marquee-track">
+            <div class="marquee-item"><span>🏫 E-Cell DYPCOE</span></div>
+            <div class="marquee-item"><span>🚀 StartupVerse</span></div>
+            <div class="marquee-item"><span>💻 TechCorp India</span></div>
+            <div class="marquee-item"><span>💡 InnoFund VC</span></div>
+            <div class="marquee-item"><span>🌐 DigitalOcean</span></div>
+            <div class="marquee-item"><span>🏆 IEEE Student Branch</span></div>
+            <div class="marquee-item"><span>💼 Entrepreneur Hub</span></div>
+            <div class="marquee-item"><span>🌱 GreenTech Labs</span></div>
+            <!-- Duplicate set for seamless loop -->
+            <div class="marquee-item"><span>🏫 E-Cell DYPCOE</span></div>
+            <div class="marquee-item"><span>🚀 StartupVerse</span></div>
+            <div class="marquee-item"><span>💻 TechCorp India</span></div>
+            <div class="marquee-item"><span>💡 InnoFund VC</span></div>
+            <div class="marquee-item"><span>🌐 DigitalOcean</span></div>
+            <div class="marquee-item"><span>🏆 IEEE Student Branch</span></div>
+            <div class="marquee-item"><span>💼 Entrepreneur Hub</span></div>
+            <div class="marquee-item"><span>🌱 GreenTech Labs</span></div>
+        </div>
+    </section>
+
     <!-- Call to Action Section -->
     <section class="section cta-section">
         <div class="container text-center">
-            <h2 class="mb-lg">Ready to Take the <span class="text-red">Challenge?</span></h2>
-            <p class="text-muted mb-xl" style="font-size: 1.25rem;">Join hundreds of students in this exciting journey
-                of innovation and entrepreneurship.</p>
-            <a href="/register" class="btn btn-primary btn-lg">Register Your Team Now</a>
+            <div class="reveal">
+                <h2 class="mb-lg">Ready to Take the <span class="text-gradient">Challenge?</span></h2>
+                <div class="hero-accent"></div>
+                <p class="text-muted mb-xl" style="font-size: 1.25rem;">Join hundreds of students in this exciting journey
+                    of innovation and entrepreneurship.</p>
+                <div class="hero-cta-group">
+                    <a href="/register" class="navbar-cta" style="font-size: 1rem; padding: 0.8rem 2rem;">Register Now <span class="cta-arrow">→</span></a>
+                    <a href="/leaderboard" class="btn btn-glass btn-lg">View Leaderboard</a>
+                </div>
+            </div>
         </div>
     </section>
 

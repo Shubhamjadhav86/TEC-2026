@@ -1,34 +1,62 @@
-// Main JavaScript file for animations and interactions
+// ================================================================
+// Main JavaScript — TEC Animation & Motion System
+// Vanilla JS · No dependencies · Production-ready
+// ================================================================
+
 document.addEventListener('DOMContentLoaded', function () {
 
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    // ────────────────────────────────────────────────────────
+    // 1. REVEAL-ON-SCROLL  (IntersectionObserver)
+    //
+    //    - Watches all elements with class .reveal
+    //    - Adds .active when element enters viewport → CSS
+    //      transition kicks in (opacity + transform)
+    //    - Un-observes after reveal to free resources
+    //    - Also picks up legacy .fade-in / .slide-in-* classes
+    // ────────────────────────────────────────────────────────
 
-    const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+    const REVEAL_SELECTOR = '.reveal, .fade-in, .slide-in-left, .slide-in-right';
 
-    // Observe all elements with fade-in class
-    document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+    const revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // one-shot — save CPU
+                }
+            });
+        },
+        {
+            threshold: 0.12,            // trigger when 12% visible
+            rootMargin: '0px 0px -60px 0px' // slight offset from bottom
+        }
+    );
+
+    // Observe all reveal targets
+    document.querySelectorAll(REVEAL_SELECTOR).forEach(function (el) {
+        revealObserver.observe(el);
     });
 
-    // Card hover effects
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mouseenter', function () {
-            this.style.transition = 'all 0.3s ease';
+    // ────────────────────────────────────────────────────────
+    // 2. GLASS-CARD GLOW TRACKING
+    //
+    //    Updates CSS custom properties --glow-x / --glow-y
+    //    so the radial-gradient in ::after follows the cursor.
+    //    Creates a tactile spotlight hover effect.
+    // ────────────────────────────────────────────────────────
+
+    document.querySelectorAll('.glass-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+            var rect = card.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+            var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+            card.style.setProperty('--glow-x', x + '%');
+            card.style.setProperty('--glow-y', y + '%');
+        });
+
+        card.addEventListener('mouseleave', function () {
+            card.style.setProperty('--glow-x', '50%');
+            card.style.setProperty('--glow-y', '50%');
         });
     });
 
@@ -193,6 +221,55 @@ document.addEventListener('DOMContentLoaded', function () {
             notification.style.animation = 'slideOutRight 0.3s ease';
             setTimeout(() => notification.remove(), 300);
         }, 3000);
+    }
+
+    // ── Glass Nav: scroll-aware transparent → blurred transition ──
+    const navbar = document.querySelector('.navbar, .glass-nav');
+    const navStrip = document.querySelector('.navbar-strip');
+    if (navbar) {
+        // Stay transparent until the About section appears
+        const aboutSection = document.getElementById('about-tec');
+        const SCROLL_THRESHOLD = aboutSection ? aboutSection.offsetTop - navbar.offsetHeight : window.innerHeight;
+        let ticking = false;
+
+        // Position navbar below the strip
+        if (navStrip) {
+            const stripH = navStrip.offsetHeight;
+            navbar.style.top = stripH + 'px';
+        }
+
+        function onScroll() {
+            // Scrolled state for glass effect + shrink
+            if (window.scrollY > SCROLL_THRESHOLD) {
+                navbar.classList.add('navbar--scrolled');
+            } else {
+                navbar.classList.remove('navbar--scrolled');
+            }
+
+            // Hide the announcement strip on scroll
+            if (navStrip) {
+                if (window.scrollY > 50) {
+                    navStrip.style.transform = 'translateY(-100%)';
+                    navStrip.style.transition = 'transform 0.3s ease';
+                    navbar.style.top = '0';
+                } else {
+                    navStrip.style.transform = 'translateY(0)';
+                    navbar.style.top = navStrip.offsetHeight + 'px';
+                }
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!ticking) {
+                window.requestAnimationFrame(onScroll);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        // Run once on load in case the page is already scrolled
+        onScroll();
     }
 
     // Add to window for global access
