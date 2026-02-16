@@ -10,17 +10,31 @@ const {
 } = require('../controllers/submissionController');
 const { protect } = require('../middleware/auth');
 const { authorize } = require('../middleware/roleCheck');
+const upload = require('../middleware/upload');
 
 // Protect all routes
 router.use(protect);
 
 // Public (Leader/Member) Routes
-router.post('/:taskId', authorize('leader', 'member'), submitTask);
+router.post(
+  '/:taskId',
+  authorize('leader', 'member'),
+  upload.single('file'),
+  submitTask
+);
 router.get('/', authorize('leader', 'member'), getAllMySubmissions);
 router.get('/:taskId/me', authorize('leader', 'member'), getMySubmission);
 
 // Admin/Evaluator Routes
-router.get('/task/:taskId', authorize('admin', 'super_admin', 'evaluator'), getSubmissionsByTask);
-router.put('/:id/grade', authorize('admin', 'super_admin', 'evaluator'), gradeSubmission);
+router.get(
+  '/task/:taskId',
+  authorize('admin', 'super_admin', 'evaluator'),
+  getSubmissionsByTask
+);
+router.put(
+  '/:id/grade',
+  authorize('admin', 'super_admin', 'evaluator'),
+  gradeSubmission
+);
 
 module.exports = router;
