@@ -184,3 +184,5 @@ For any issues or questions:
 ---
 
 **Built with ❤️ by E-Cell Team**
+
+# TEC-2026
