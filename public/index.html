@@ -238,12 +238,20 @@
         <span>🏁 Season 2026 — <span class="strip-highlight">Applications Open</span> · Limited Slots Remaining</span>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar">
+    <!-- Navbar — F1 HUD Glassmorphism Bar -->
+    <nav class="navbar" id="mainNavbar">
         <div class="navbar-container">
-            <a href="/" class="navbar-logo">
+            <!-- HUD Telemetry Readouts (Decorative) -->
+            <div class="navbar-hud" aria-hidden="true">
+                <span class="hud-readout hud-tl">G-FORCE: 0.98</span>
+                <span class="hud-readout hud-tr">RPM: 12,580</span>
+                <span class="hud-readout hud-tr2">TIRE TEMP: 85°C</span>
+                <span class="hud-readout hud-bl">RPM: 12,580</span>
+                <span class="hud-readout hud-bl2">TIRE TEMP: 85°C</span>
+            </div>
+            <a href="/" class="navbar-logo" aria-label="TEC Home">
+                <div class="logo-speed-lines" aria-hidden="true"></div>
                 <img src="/assets/teclogo.svg" alt="TEC Logo">
-                <span>TEC</span>
             </a>
             <div class="navbar-menu" id="navbarMenu">
                 <a href="/" class="navbar-link active">Home</a>
@@ -251,12 +259,10 @@
                 <a href="/leaderboard" class="navbar-link">Leaderboard</a>
                 <a href="/login" class="navbar-link">Login</a>
                 <span class="navbar-divider"></span>
-                <a href="/register" class="navbar-cta">Register <span class="cta-arrow">→</span></a>
+                <a href="/register" class="navbar-cta">Register</a>
             </div>
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" role="button" tabindex="0">
+                <span></span><span></span><span></span>
             </div>
         </div>
     </nav>

@@ -223,29 +223,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000);
     }
 
-    // ── Glass Nav: scroll-aware transparent → blurred transition ──
+    // ── Glass Nav: scroll-aware strip toggle ──
     const navbar = document.querySelector('.navbar, .glass-nav');
     const navStrip = document.querySelector('.navbar-strip');
     if (navbar) {
-        // Stay transparent until the About section appears
-        const aboutSection = document.getElementById('about-tec');
-        const SCROLL_THRESHOLD = aboutSection ? aboutSection.offsetTop - navbar.offsetHeight : window.innerHeight;
-        let ticking = false;
-
-        // Position navbar below the strip
+        // Position navbar below the strip initially
         if (navStrip) {
             const stripH = navStrip.offsetHeight;
             navbar.style.top = stripH + 'px';
         }
 
-        function onScroll() {
-            // Scrolled state for glass effect + shrink
-            if (window.scrollY > SCROLL_THRESHOLD) {
-                navbar.classList.add('navbar--scrolled');
-            } else {
-                navbar.classList.remove('navbar--scrolled');
-            }
+        let ticking = false;
 
+        function onScroll() {
             // Hide the announcement strip on scroll
             if (navStrip) {
                 if (window.scrollY > 50) {
@@ -257,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     navbar.style.top = navStrip.offsetHeight + 'px';
                 }
             }
-
             ticking = false;
         }
 

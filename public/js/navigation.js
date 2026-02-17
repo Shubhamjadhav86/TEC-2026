@@ -147,10 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (navbarMenu && navbarMenu.classList.contains('active')) {
             navbarMenu.classList.remove('active');
             if (menuToggle) {
-                const spans = menuToggle.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+                menuToggle.classList.remove('is-open');
             }
         }
     }
@@ -158,18 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (menuToggle) {
         menuToggle.addEventListener('click', function () {
             navbarMenu.classList.toggle('active');
-
-            // Animate hamburger
-            const spans = menuToggle.querySelectorAll('span');
-            if (navbarMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
+            menuToggle.classList.toggle('is-open');
         });
     }
 
@@ -188,11 +174,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 100) {
-            navbar.style.background = 'rgba(5, 5, 5, 0.98)';
-            navbar.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.3)';
+            navbar.classList.add('navbar--scrolled');
         } else {
-            navbar.style.background = 'rgba(5, 5, 5, 0.95)';
-            navbar.style.boxShadow = 'none';
+            navbar.classList.remove('navbar--scrolled');
         }
     });
 
