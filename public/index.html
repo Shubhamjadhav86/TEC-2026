@@ -136,8 +136,9 @@
             position: absolute;
             inset: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
+            padding-top: 24vh;
             z-index: 5;
             pointer-events: none;
             user-select: none;
@@ -151,6 +152,8 @@
             line-height: 0.8;
             display: flex;
             gap: 3vw;
+            transform: scaleY(1.35);
+            transform-origin: top center;
         }
 
         /* Each word container */
@@ -163,7 +166,7 @@
         .hero-typo-base {
             font-family: 'Teko', sans-serif;
             font-weight: 700;
-            font-size: 18vw;
+            font-size: 20vw;
             color: #ffffff;
             letter-spacing: 0.02em;
         }
@@ -174,7 +177,7 @@
             inset: 0;
             font-family: 'Teko', sans-serif;
             font-weight: 700;
-            font-size: 18vw;
+            font-size: 20vw;
             letter-spacing: 0.02em;
             color: transparent;
             -webkit-background-clip: text;
@@ -198,6 +201,375 @@
             to {
                 opacity: 0.5;
                 transform: scale(1.0);
+            }
+        }
+
+        /* ══════════════════════════════════════════
+           Layer 6: Hero Car
+           ══════════════════════════════════════════ */
+        .hero-car-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .hero-car-inner {
+            position: relative;
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-car-asset {
+            position: relative;
+            width: 160%;
+            max-width: none;
+            margin-bottom: 2vh;
+            animation:
+                carEntrance 1.2s cubic-bezier(0.22, 1.2, 0.36, 1) forwards,
+                carIdle 4s ease-in-out 1.4s infinite;
+            opacity: 0;
+            filter:
+                drop-shadow(0 0 15px rgba(255,255,255,0.1))
+                drop-shadow(0 8px 30px rgba(0,0,0,0.6));
+            will-change: transform, opacity;
+        }
+
+        /* Desktop: centered, absolute positioned */
+        @media (min-width: 768px) {
+            .hero-car-inner {
+                align-items: center;
+            }
+            .hero-car-asset {
+                position: absolute;
+                top: -2%;
+                left: 50%;
+                width: 105%;
+                margin-bottom: 0;
+                animation:
+                    carEntranceDesktop 1.2s cubic-bezier(0.22, 1.2, 0.36, 1) forwards,
+                    carIdle 4s ease-in-out 1.4s infinite;
+            }
+        }
+
+        /* Contact shadow under car */
+        .hero-car-shadow {
+            position: absolute;
+            bottom: -2vh;
+            left: 50%;
+            width: 70%;
+            height: 40px;
+            transform: translateX(-50%);
+            background: radial-gradient(
+                ellipse 100% 100% at 50% 50%,
+                rgba(0,0,0,0.6) 0%,
+                rgba(0,0,0,0.2) 40%,
+                transparent 70%
+            );
+            border-radius: 50%;
+            opacity: 0;
+            animation: shadowFade 1.2s ease-out 0.8s forwards;
+            pointer-events: none;
+        }
+
+        @media (min-width: 768px) {
+            .hero-car-shadow {
+                bottom: auto;
+                top: calc(5% + 52vh);
+                width: 55%;
+                height: 50px;
+            }
+        }
+
+        /* Entrance — mobile (slides from right) */
+        @keyframes carEntrance {
+            0% {
+                opacity: 0;
+                transform: translateX(250px);
+            }
+            70% {
+                opacity: 1;
+                transform: translateX(-8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Entrance — desktop (slides from right, centers) */
+        @keyframes carEntranceDesktop {
+            0% {
+                opacity: 0;
+                transform: translateX(calc(-50% + 250px));
+            }
+            70% {
+                opacity: 1;
+                transform: translateX(calc(-50% - 8px));
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Idle hover — subtle engine vibration */
+        @keyframes carIdle {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-5px); }
+        }
+
+        /* Desktop idle needs to preserve translateX */
+        @media (min-width: 768px) {
+            @keyframes carIdle {
+                0%, 100% { transform: translateX(-50%) translateY(0); }
+                50%      { transform: translateX(-50%) translateY(-5px); }
+            }
+        }
+
+        /* Shadow entrance */
+        @keyframes shadowFade {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* ══════════════════════════════════════════
+           Layer 7: Hero Content Overlay
+           ══════════════════════════════════════════ */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 25;
+            pointer-events: none;
+            padding: 0 clamp(1rem, 4vw, 3rem);
+        }
+
+        /* ── Top Info Bar ── */
+        .hero-info-bar {
+            position: absolute;
+            top: 12%;
+            left: clamp(1rem, 4vw, 3rem);
+            right: clamp(1rem, 4vw, 3rem);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-info-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            white-space: nowrap;
+        }
+
+        .hero-info-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                rgba(255,255,255,0.15),
+                rgba(255,255,255,0.05) 50%,
+                rgba(255,255,255,0.15)
+            );
+        }
+
+        /* ── Bottom Cards Container ── */
+        .hero-bottom-cards {
+            position: absolute;
+            bottom: 6%;
+            left: clamp(1rem, 4vw, 3rem);
+            right: clamp(1rem, 4vw, 3rem);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1rem;
+            pointer-events: auto;
+        }
+
+        /* ── Glass Card Base ── */
+        .hero-glass-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.2s forwards;
+        }
+
+        .hero-glass-card:nth-child(2) {
+            animation-delay: 1.5s;
+        }
+
+        /* ── Countdown Card (Left) ── */
+        .hero-countdown-card {
+            max-width: 340px;
+        }
+
+        .hero-countdown-card .card-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #FF1E1E;
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-countdown-card .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .hero-countdown-card .card-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-boxes {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .countdown-box {
+            background: rgba(255,30,30,0.15);
+            border: 1px solid rgba(255,30,30,0.25);
+            border-radius: 8px;
+            padding: 0.5rem 0.65rem;
+            text-align: center;
+            min-width: 52px;
+        }
+
+        .countdown-box .cd-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #FF1E1E;
+            line-height: 1;
+        }
+
+        .countdown-box .cd-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.15rem;
+        }
+
+        /* ── Article Card (Right) ── */
+        .hero-article-card {
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .hero-article-card .card-thumb {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                rgba(255,30,30,0.2) 0%,
+                rgba(15,15,15,0.8) 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-article-card .card-thumb img {
+            height: 40px;
+            opacity: 0.6;
+        }
+
+        .hero-article-card .article-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .hero-article-card .article-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.4;
+        }
+
+        .hero-article-card .article-cta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.2s ease;
+        }
+
+        .hero-article-card .article-cta:hover {
+            color: #FF1E1E;
+        }
+
+        .dot-indicators {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot-indicators span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .dot-indicators span.active {
+            background: rgba(255,255,255,0.7);
+        }
+
+        /* ── Card Responsive ── */
+        @media (max-width: 767px) {
+            .hero-bottom-cards {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .hero-countdown-card,
+            .hero-article-card {
+                max-width: none;
+            }
+            .hero-article-card {
+                display: none;
+            }
+            .hero-info-bar {
+                top: 8%;
             }
         }
 
@@ -443,8 +815,76 @@
                 </div>
             </div>
 
+            <!-- Layer 6: F1 Car Hero Asset -->
+            <div class="hero-car-container">
+                <div class="hero-car-inner">
+                    <img
+                        src="/assets/Car.png"
+                        alt="F1 Car"
+                        class="hero-car-asset"
+                        draggable="false"
+                    />
+                    <div class="hero-car-shadow" aria-hidden="true"></div>
+                </div>
+            </div>
 
+            <!-- Layer 7: Hero Content Overlay -->
+            <div class="hero-overlay">
 
+                <!-- Top Info Bar -->
+                <div class="hero-info-bar">
+                    <span class="hero-info-label">Season 2026</span>
+                    <div class="hero-info-line"></div>
+                    <span class="hero-info-label">Engineered Insanity</span>
+                </div>
+
+                <!-- Bottom Cards -->
+                <div class="hero-bottom-cards">
+
+                    <!-- Countdown Card -->
+                    <div class="hero-glass-card hero-countdown-card">
+                        <div class="card-label">Next Event</div>
+                        <div class="card-title">The Entrepreneurship Challenge</div>
+                        <div class="card-subtitle">Countdown to Registration Close</div>
+                        <div class="countdown-boxes" id="heroCountdown">
+                            <div class="countdown-box">
+                                <div class="cd-value" id="cd-days">00</div>
+                                <div class="cd-label">Days</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="cd-value" id="cd-hours">00</div>
+                                <div class="cd-label">Hours</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="cd-value" id="cd-mins">00</div>
+                                <div class="cd-label">Minutes</div>
+                            </div>
+                            <div class="countdown-box">
+                                <div class="cd-value" id="cd-secs">00</div>
+                                <div class="cd-label">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card -->
+                    <div class="hero-glass-card hero-article-card">
+                        <div class="card-thumb">
+                            <img src="/assets/teclogo.svg" alt="TEC" />
+                        </div>
+                        <span class="article-label">Article</span>
+                        <span class="article-title">From ideas to impact — how TEC shapes tomorrow's founders</span>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div class="dot-indicators">
+                                <span class="active"></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <a href="#about-tec" class="article-cta">Read more →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
         </div>
