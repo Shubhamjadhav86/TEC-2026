@@ -1,3 +1,7 @@
+/**
+ * Custom error class for handling operational errors in the application.
+ * Extends the built-in Error class to include HTTP status codes and status strings.
+ */
 class AppError extends Error {
     constructor(message, statusCode) {
         super(message);
