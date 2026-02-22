@@ -59,6 +59,19 @@
             pointer-events: none;
         }
 
+        /* ── About Section: Same Dot Grid Texture ── */
+        .about-texture {
+            position: absolute;
+            inset: -64px;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 16px 16px;
+            will-change: transform;
+            animation: textureDrift 30s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
 
 
         /* ── Layer 3: Diagonal Speed Lines ── */
@@ -118,8 +131,75 @@
             pointer-events: none;
         }
 
-        /* ── Vignette Edge Fade ── */
+        /* ── About Section: Same Diagonal Speed Lines ── */
+        .about-speedlines {
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(
+                    -35deg,
+                    transparent 0px,
+                    transparent 120px,
+                    rgba(255,255,255,0.045) 120px,
+                    rgba(255,255,255,0.045) 170px,
+                    transparent 170px,
+                    transparent 180px,
+                    rgba(255,255,255,0.03) 180px,
+                    rgba(255,255,255,0.03) 220px,
+                    transparent 220px,
+                    transparent 320px
+                ),
+                repeating-linear-gradient(
+                    -35deg,
+                    transparent 0px,
+                    transparent 200px,
+                    rgba(255,255,255,0.025) 200px,
+                    rgba(255,255,255,0.025) 240px,
+                    transparent 240px,
+                    transparent 260px,
+                    rgba(255,255,255,0.015) 260px,
+                    rgba(255,255,255,0.015) 262px,
+                    transparent 262px,
+                    transparent 280px,
+                    rgba(255,255,255,0.015) 280px,
+                    rgba(255,255,255,0.015) 282px,
+                    transparent 282px,
+                    transparent 500px
+                ),
+                repeating-linear-gradient(
+                    -35deg,
+                    transparent 0px,
+                    transparent 115px,
+                    rgba(255,255,255,0.02) 115px,
+                    rgba(255,255,255,0.02) 117px,
+                    transparent 117px,
+                    transparent 175px,
+                    rgba(255,255,255,0.02) 175px,
+                    rgba(255,255,255,0.02) 177px,
+                    transparent 177px,
+                    transparent 450px
+                );
+            opacity: 0.7;
+            animation: speedLinePulse 8s ease-in-out infinite;
+            z-index: 3;
+            pointer-events: none;
+        }
         .hero-vignette {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(
+                    ellipse 100% 100% at 50% 50%,
+                    transparent 40%,
+                    rgba(15,15,15,0.5) 75%,
+                    #0f0f0f 100%
+                );
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* ── About Section: Same Vignette Edge Fade ── */
+        .about-vignette {
             position: absolute;
             inset: 0;
             background:
@@ -195,6 +275,24 @@
             );
         }
 
+        /* ── About Section: Typography Slice Effect ── */
+        .about-typo-slice {
+            position: absolute;
+            inset: 0;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-image: linear-gradient(
+                -40deg,
+                transparent 16%,
+                rgba(255, 30, 30, 0) 35%,
+                #FF1E1E 50%,
+                #FF1E1E 55%,
+                rgba(255, 30, 30, 0) 72%,
+                transparent 100%
+            );
+        }
+
         @keyframes typoReveal {
             from {
                 opacity: 0;
@@ -216,6 +314,19 @@
             pointer-events: none;
             z-index: 10;
             background: linear-gradient(to top, rgba(255, 30, 30, 0.5), rgba(255, 30, 30, 0.1), transparent);
+            filter: blur(64px);
+        }
+
+        /* ── About Section: Ambient Top Glow (Inverted) ── */
+        .about-ambient-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 12rem;
+            pointer-events: none;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(255, 30, 30, 0.5), rgba(255, 30, 30, 0.1), transparent);
             filter: blur(64px);
         }
 
@@ -811,8 +922,6 @@
             box-shadow: 0 0 15px rgba(255, 30, 30, 0.15), inset 0 0 20px rgba(255, 30, 30, 0.05);
         }
     </style>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Theme Configuration -->
     <script id="tailwind-config">
         tailwind.config = {
@@ -843,18 +952,13 @@
             },
         }
     </script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 </head>
 
 <body>
     <!-- Skip-to-content link for keyboard users -->
     <a href="#about-tec" class="skip-link">Skip to Main Content</a>
-
-    <!-- Ambient Mesh Gradient Background -->
-    <div class="ambient-bg" aria-hidden="true">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
 
 
 
@@ -936,52 +1040,7 @@
                     <span class="hero-info-label">Engineered Insanity</span>
                 </div>
 
-                <!-- Bottom Cards -->
-                <div class="hero-bottom-cards">
-
-                    <!-- Countdown Card -->
-                    <div class="hero-glass-card hero-countdown-card">
-                        <div class="card-label">Next Event</div>
-                        <div class="card-title">The Entrepreneurship Challenge</div>
-                        <div class="card-subtitle">Countdown to Registration Close</div>
-                        <div class="countdown-boxes" id="heroCountdown">
-                            <div class="countdown-box">
-                                <div class="cd-value" id="cd-days">00</div>
-                                <div class="cd-label">Days</div>
-                            </div>
-                            <div class="countdown-box">
-                                <div class="cd-value" id="cd-hours">00</div>
-                                <div class="cd-label">Hours</div>
-                            </div>
-                            <div class="countdown-box">
-                                <div class="cd-value" id="cd-mins">00</div>
-                                <div class="cd-label">Minutes</div>
-                            </div>
-                            <div class="countdown-box">
-                                <div class="cd-value" id="cd-secs">00</div>
-                                <div class="cd-label">Seconds</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Article Card -->
-                    <div class="hero-glass-card hero-article-card">
-                        <div class="card-thumb">
-                            <img src="/assets/teclogo.svg" alt="TEC" />
-                        </div>
-                        <span class="article-label">Article</span>
-                        <span class="article-title">From ideas to impact — how TEC shapes tomorrow's founders</span>
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div class="dot-indicators">
-                                <span class="active"></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <a href="#about-tec" class="article-cta">Read more →</a>
-                        </div>
-                    </div>
-
-                </div>
+                <!-- Bottom Cards removed -->
             </div>
 
 
@@ -1000,23 +1059,17 @@
     </style>
 
     <!-- About TEC Section (Telemetry Interface) -->
-    <section id="about" class="relative w-full bg-background-dark text-slate-100 font-display overflow-hidden flex flex-col">
-        <!-- Scanline Overlay -->
-        <div class="scanlines"></div>
+    <section id="about" class="relative w-full bg-[#0f0f0f] text-slate-100 font-display overflow-hidden flex flex-col">
         <!-- Background Elements -->
-        <div class="absolute inset-0 z-0 bg-background-dark">
-            <!-- Carbon Fiber Texture -->
-            <div class="absolute inset-0 bg-carbon-fiber opacity-40"></div>
-            <!-- Top Neon Bleed -->
-            <div class="absolute top-0 left-0 right-0 h-64 neon-glow-top opacity-60"></div>
-            <!-- Background Ticker -->
-            <div class="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-[0.03] select-none pointer-events-none transform -rotate-2 scale-110">
-                <div class="ticker-wrap">
-                    <div class="ticker text-[120px] font-bold leading-none">
-                        BUILD // ENGINEER // COMPETE // LAUNCH // BUILD // ENGINEER // COMPETE // LAUNCH // BUILD // ENGINEER // COMPETE // LAUNCH //
-                    </div>
-                </div>
-            </div>
+        <div class="absolute inset-0 z-0 bg-[#0f0f0f]">
+            <!-- Dot Grid Texture -->
+            <div class="about-texture"></div>
+            <!-- Diagonal Speed Lines -->
+            <div class="about-speedlines"></div>
+            <!-- Vignette Edge Fade -->
+            <div class="about-vignette"></div>
+            <!-- Ambient Top Glow -->
+            <div class="about-ambient-glow"></div>
         </div>
 
         <!-- Main Dashboard Layout -->
@@ -1028,8 +1081,9 @@
                         <span class="material-symbols-outlined text-sm">terminal</span>
                         <span class="font-mono text-xs tracking-widest">/// SYSTEM_DIAGNOSTICS_V.2.4</span>
                     </div>
-                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] mb-8 text-white">
-                        WHAT<br/>IS <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">TEC</span>
+                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9] mb-8 relative inline-block">
+                        <span class="text-white block">WHAT<br/>IS <span class="text-primary">TEC</span></span>
+                        <span class="about-typo-slice" aria-hidden="true" style="white-space: pre-wrap;">WHAT<br/>IS TEC</span>
                     </h1>
                     <div class="pl-1 border-l-4 border-solid border-primary/50 mb-10">
                         <p class="pl-6 text-xl md:text-2xl text-slate-300 font-medium leading-relaxed max-w-xl">
@@ -1084,27 +1138,23 @@
                         <div class="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-solid border-primary/30"></div>
                         <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-solid border-primary/30"></div>
                     </div>
-                    <!-- Module 3: Active State (Rules) -->
-                    <div class="glass-panel-active p-6 rounded flex flex-col relative overflow-hidden">
-                        <!-- Red Grid Background for Active Module -->
-                        <div class="absolute inset-0 bg-grid-pattern bg-[length:20px_20px] opacity-20"></div>
-                        <div class="absolute top-3 right-3 flex items-center gap-2">
-                            <span class="block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                            <span class="text-[10px] font-mono text-primary">ACTIVE_SCAN</span>
-                        </div>
-                        <div class="relative z-10 mb-4 text-primary">
+                    <!-- Module 3: Rules & Guidelines -->
+                    <div class="glass-panel p-6 rounded flex flex-col relative group hover:border-primary/50 transition-colors">
+                        <div class="absolute top-3 right-3 text-[10px] font-mono text-slate-600">MOD_03</div>
+                        <div class="mb-4 text-primary">
                             <span class="material-symbols-outlined text-4xl">gavel</span>
                         </div>
-                        <div class="relative z-10">
-                            <h3 class="text-xl font-bold text-white mb-2 tracking-tight">RULES &amp; GUIDELINES</h3>
-                            <p class="text-sm text-slate-300 leading-relaxed mb-4">
-                                Critical competition protocols. Adherence is mandatory for qualification.
-                            </p>
-                            <a class="inline-flex items-center text-xs font-bold text-primary hover:text-white transition-colors uppercase tracking-wider" href="#">
-                                Download PDF Protocol 
-                                <span class="material-symbols-outlined text-sm ml-1">download</span>
-                            </a>
-                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2 tracking-tight">RULES & GUIDELINES</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                            Critical competition protocols. Adherence is mandatory for qualification.
+                        </p>
+                        <a class="inline-flex items-center text-xs font-bold text-primary hover:text-white transition-colors uppercase tracking-wider" href="#">
+                            Download PDF Protocol 
+                            <span class="material-symbols-outlined text-sm ml-1">download</span>
+                        </a>
+                        <!-- Decorative corner accents -->
+                        <div class="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-solid border-primary/30"></div>
+                        <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-solid border-primary/30"></div>
                     </div>
                     <!-- Module 4: Timeline / Contact -->
                     <div class="glass-panel p-6 rounded flex flex-col relative group hover:border-primary/50 transition-colors">
