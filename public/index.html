@@ -684,6 +684,14 @@
             background: rgba(255,255,255,0.7);
         }
 
+        /* ── Advanced Circuit Map Telemetry ── */
+        .track-path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: traceTrack 8s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        @keyframes traceTrack { 50% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -2400; } }
+        .radar-ping { animation: radarPing 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        @keyframes radarPing { 75%, 100% { transform: scale(2.5); opacity: 0; } }
+        .tooltip-line { transition: height 0.3s ease; }
+        .group:hover .tooltip-line { height: 24px; }
+
         /* ── Card Responsive ── */
         @media (max-width: 767px) {
             .hero-bottom-cards {
@@ -1222,41 +1230,130 @@
         </main>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="section" style="background: var(--dark-gray); position: relative; z-index: 2;">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="section-label">🛠️ Process</span>
-                <h2 class="section-title">How It <span class="text-gradient">Works</span></h2>
-            </div>
-            <div class="events-grid">
-                <div class="glass-card text-center reveal delay-1">
-                    <div class="step-number">1</div>
-                    <h4>Register Team</h4>
-                    <p class="text-muted">Create your team account and complete registration.</p>
-                </div>
-                <div class="glass-card text-center reveal delay-2">
-                    <div class="step-number">2</div>
-                    <h4>Add Members</h4>
-                    <p class="text-muted">Invite your team members (up to 5 members).</p>
-                </div>
-                <div class="glass-card text-center reveal delay-3">
-                    <div class="step-number">3</div>
-                    <h4>Complete Tasks</h4>
-                    <p class="text-muted">Work on assigned tasks for each competition phase.</p>
-                </div>
-                <div class="glass-card text-center reveal delay-4">
-                    <div class="step-number">4</div>
-                    <h4>Submit Reports</h4>
-                    <p class="text-muted">Submit your solutions and documentation on time.</p>
-                </div>
-                <div class="glass-card text-center reveal delay-5">
-                    <div class="step-number">5</div>
-                    <h4>Get Ranked</h4>
-                    <p class="text-muted">Earn points and climb the leaderboard to win!</p>
-                </div>
-            </div>
+    <!-- How It Works / The Circuit Section -->
+    <section class="section" style="background: #0f0f0f; position: relative; z-index: 2; overflow: hidden;">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="about-texture"></div>
+            <div class="about-speedlines"></div>
         </div>
+        <section class="relative w-full max-w-6xl mx-auto py-32 flex flex-col items-center z-10">
+          <div class="text-center mb-16 relative z-20">
+            <p class="text-[#FF1E1E] font-mono text-xs tracking-[0.3em] mb-2 uppercase">System Protocol</p>
+            <h2 class="text-5xl md:text-6xl font-black text-white uppercase tracking-tighter">The Circuit</h2>
+          </div>
+
+          <div class="relative w-full h-[600px]">
+            <svg viewBox="0 0 1000 600" class="absolute inset-0 w-full h-full drop-shadow-[0_0_20px_rgba(255,30,30,0.3)] pointer-events-none">
+              <defs>
+                <filter id="neon" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path d="M 150,300 C 150,150 300,100 500,150 C 700,200 850,100 850,300 C 850,500 700,550 500,450 C 300,350 150,450 150,300 Z" stroke="#1f1f1f" stroke-width="12" fill="none" stroke-linecap="round" />
+              <path d="M 150,300 C 150,150 300,100 500,150 C 700,200 850,100 850,300 C 850,500 700,550 500,450 C 300,350 150,450 150,300 Z" stroke="#FF1E1E" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#neon)" class="track-path" />
+            </svg>
+
+            <!-- Node 1 -->
+            <div class="absolute left-[15%] top-[50%] -translate-x-1/2 -translate-y-1/2 group cursor-crosshair z-30">
+              <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 rounded-full border-2 border-[#FF1E1E] radar-ping"></div>
+                <div class="w-3 h-3 bg-[#FF1E1E] rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+              </div>
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none">
+                <div class="w-72 p-4 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#FF1E1E]/40 rounded-lg shadow-2xl">
+                  <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                    <span class="text-[10px] font-mono text-[#FF1E1E]">PHASE_01</span>
+                    <span class="text-[9px] font-mono text-white/50">REGISTER</span>
+                  </div>
+                  <h3 class="text-white font-bold text-lg leading-tight mb-1">REGISTER TEAM</h3>
+                  <p class="text-xs text-slate-400">Initialize your team account and lock in your roster to enter the grid.</p>
+                </div>
+                <div class="w-px h-0 bg-[#FF1E1E]/50 tooltip-line mt-1"></div>
+              </div>
+            </div>
+
+            <!-- Node 2 -->
+            <div class="absolute left-[31%] top-[20%] -translate-x-1/2 -translate-y-1/2 group cursor-crosshair z-30">
+              <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 rounded-full border-2 border-[#FF1E1E] radar-ping" style="animation-delay: 0.4s"></div>
+                <div class="w-3 h-3 bg-[#FF1E1E] rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+              </div>
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none">
+                <div class="w-72 p-4 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#FF1E1E]/40 rounded-lg shadow-2xl">
+                  <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                    <span class="text-[10px] font-mono text-[#FF1E1E]">PHASE_02</span>
+                    <span class="text-[9px] font-mono text-white/50">CREW</span>
+                  </div>
+                  <h3 class="text-white font-bold text-lg leading-tight mb-1">ADD MEMBERS</h3>
+                  <p class="text-xs text-slate-400">Invite up to 5 personnel to your pit crew to execute the competition directives.</p>
+                </div>
+                <div class="w-px h-0 bg-[#FF1E1E]/50 tooltip-line mt-1"></div>
+              </div>
+            </div>
+
+            <!-- Node 3 -->
+            <div class="absolute left-[68%] top-[25%] -translate-x-1/2 -translate-y-1/2 group cursor-crosshair z-30">
+              <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 rounded-full border-2 border-[#FF1E1E] radar-ping" style="animation-delay: 0.8s"></div>
+                <div class="w-3 h-3 bg-[#FF1E1E] rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+              </div>
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none">
+                <div class="w-72 p-4 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#FF1E1E]/40 rounded-lg shadow-2xl">
+                  <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                    <span class="text-[10px] font-mono text-[#FF1E1E]">PHASE_03</span>
+                    <span class="text-[9px] font-mono text-white/50">EXECUTE</span>
+                  </div>
+                  <h3 class="text-white font-bold text-lg leading-tight mb-1">COMPLETE TASKS</h3>
+                  <p class="text-xs text-slate-400">Tackle real-world challenges and develop your startup solutions within the deadline.</p>
+                </div>
+                <div class="w-px h-0 bg-[#FF1E1E]/50 tooltip-line mt-1"></div>
+              </div>
+            </div>
+
+            <!-- Node 4 -->
+            <div class="absolute left-[85%] top-[50%] -translate-x-1/2 -translate-y-1/2 group cursor-crosshair z-30">
+              <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 rounded-full border-2 border-[#FF1E1E] radar-ping" style="animation-delay: 1.2s"></div>
+                <div class="w-3 h-3 bg-[#FF1E1E] rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+              </div>
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none">
+                <div class="w-72 p-4 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#FF1E1E]/40 rounded-lg shadow-2xl">
+                  <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                    <span class="text-[10px] font-mono text-[#FF1E1E]">PHASE_04</span>
+                    <span class="text-[9px] font-mono text-white/50">UPLOAD</span>
+                  </div>
+                  <h3 class="text-white font-bold text-lg leading-tight mb-1">SUBMIT REPORTS</h3>
+                  <p class="text-xs text-slate-400">Upload your PDF documentation and pitch materials to the evaluation mainframe.</p>
+                </div>
+                <div class="w-px h-0 bg-[#FF1E1E]/50 tooltip-line mt-1"></div>
+              </div>
+            </div>
+
+            <!-- Node 5 -->
+            <div class="absolute left-[50%] top-[75%] -translate-x-1/2 -translate-y-1/2 group cursor-crosshair z-30">
+              <div class="relative flex items-center justify-center w-8 h-8">
+                <div class="absolute inset-0 rounded-full border-2 border-[#FF1E1E] radar-ping" style="animation-delay: 1.6s"></div>
+                <div class="w-3 h-3 bg-[#FF1E1E] rounded-full shadow-[0_0_10px_#FF1E1E]"></div>
+              </div>
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 flex flex-col items-center opacity-0 group-hover:opacity-100 group-hover:-translate-y-2 transition-all duration-300 pointer-events-none">
+                <div class="w-72 p-4 bg-[#0a0a0a]/95 backdrop-blur-md border border-[#FF1E1E]/40 rounded-lg shadow-2xl">
+                  <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                    <span class="text-[10px] font-mono text-[#FF1E1E]">PHASE_05</span>
+                    <span class="text-[9px] font-mono text-[#FF1E1E] animate-pulse">LIVE</span>
+                  </div>
+                  <h3 class="text-white font-bold text-lg leading-tight mb-1">GET RANKED</h3>
+                  <p class="text-xs text-slate-400">System calculates total points. Climb the live leaderboard to secure the podium.</p>
+                </div>
+                <div class="w-px h-0 bg-[#FF1E1E]/50 tooltip-line mt-1"></div>
+              </div>
+            </div>
+          </div>
+        </section>
     </section>
 
     <!-- Competition Phases Section -->
